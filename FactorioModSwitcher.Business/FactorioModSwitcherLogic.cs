@@ -67,6 +67,11 @@ namespace FactorioModSwitcher.Business
             return profiles;
         }
 
+        public void SwitchProfile(Profile profile)
+        {
+            JsonConverter.Serialize(profile.Mods, m_pathToModList);
+        }
+
 
     }
 }

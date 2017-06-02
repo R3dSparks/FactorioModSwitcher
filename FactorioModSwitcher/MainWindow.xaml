@@ -22,7 +22,7 @@
             </MenuItem>
         </Menu>
 
-        <ListView Grid.Row="1" ItemsSource="{Binding ProfileList}">
+        <ListView Grid.Row="1" ItemsSource="{Binding ProfileList}" SelectedItem="{Binding SelectedProfile}">
             
             <ListView.ItemTemplate>
                 <DataTemplate>

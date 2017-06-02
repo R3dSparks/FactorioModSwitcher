@@ -1,4 +1,5 @@
 ﻿using FactorioModSwitcher.Business;
+using FactorioModSwitcher.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,14 @@ namespace FactorioModSwitcher.ViewModels
             }
         }
 
+        /// <summary>
+        /// Currently selected profile
+        /// </summary>
+        public Profile SelectedProfile { get; set; }
+
+        /// <summary>
+        /// List of all profiles
+        /// </summary>
         public List<Profile> ProfileList
         {
             get => m_logic.Profiles;
@@ -38,9 +47,12 @@ namespace FactorioModSwitcher.ViewModels
             m_logic = new FactorioModSwitcherLogic();
         }
 
+        /// <summary>
+        /// Switch current mod list with the selected profile
+        /// </summary>
         private void switchProfile()
         {
-
+            m_logic.SwitchProfile(SelectedProfile);
         }
     }
 }

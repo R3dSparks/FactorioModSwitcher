@@ -111,6 +111,10 @@
       <Project>{031EE6DE-E50F-446B-AA82-5CAC1366943D}</Project>
       <Name>FactorioModSwitcher.Business</Name>
     </ProjectReference>
+    <ProjectReference Include="..\FactorioModSwitcher.Data\FactorioModSwitcher.Data.csproj">
+      <Project>{F12E5D24-AA4F-41B2-91F9-35664F8FC5CD}</Project>
+      <Name>FactorioModSwitcher.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Fody.2.0.0\build\dotnet\Fody.targets" Condition="Exists('..\packages\Fody.2.0.0\build\dotnet\Fody.targets')" />
