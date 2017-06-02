@@ -13,6 +13,11 @@ namespace FactorioModSwitcher.Data
     {     
         public static T Deserialize<T>(string path)
         {
+            if (Directory.Exists(path) == false)
+            {
+                Directory.CreateDirectory(Path.GetDirectoryName(path));
+            }
+
             T jsonObject;
 
             using (StreamReader reader = new StreamReader(path))
@@ -24,7 +29,7 @@ namespace FactorioModSwitcher.Data
         }
 
         public static void Serialize(object objectToSerialize,string path)
-        {
+        {         
             string output = JsonConvert.SerializeObject(objectToSerialize);
 
             using (StreamWriter writer = new StreamWriter(path))
@@ -32,6 +37,7 @@ namespace FactorioModSwitcher.Data
                 writer.Write(output);
             }
         }
+
 
     }
 }
