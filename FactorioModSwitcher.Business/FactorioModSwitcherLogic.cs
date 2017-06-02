@@ -61,7 +61,8 @@ namespace FactorioModSwitcher.Business
 
             if (Directory.Exists(m_pathToProfileFolder) == false)
             {
-                Directory.CreateDirectory(Path.GetDirectoryName(m_pathToProfileFolder));
+                string temp = Path.GetDirectoryName(m_pathToProfileFolder);
+                Directory.CreateDirectory(m_pathToProfileFolder);
             }
 
             foreach (string path in Directory.GetFiles(m_pathToProfileFolder))
