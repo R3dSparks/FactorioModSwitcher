@@ -59,6 +59,11 @@ namespace FactorioModSwitcher.Business
         {
             List<Profile> profiles = new List<Profile>();
 
+            if (Directory.Exists(m_pathToProfileFolder) == false)
+            {
+                Directory.CreateDirectory(Path.GetDirectoryName(m_pathToProfileFolder));
+            }
+
             foreach (string path in Directory.GetFiles(m_pathToProfileFolder))
             {
                 profiles.Add(new Profile(Path.GetFileNameWithoutExtension(path), JsonConverter.Deserialize<ModList>(path)));

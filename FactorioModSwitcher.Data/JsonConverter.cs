@@ -13,11 +13,6 @@ namespace FactorioModSwitcher.Data
     {     
         public static T Deserialize<T>(string path)
         {
-            if (Directory.Exists(path) == false)
-            {
-                Directory.CreateDirectory(Path.GetDirectoryName(path));
-            }
-
             T jsonObject;
 
             using (StreamReader reader = new StreamReader(path))
