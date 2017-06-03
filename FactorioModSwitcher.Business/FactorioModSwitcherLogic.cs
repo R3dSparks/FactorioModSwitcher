@@ -1,4 +1,5 @@
 ﻿using FactorioModSwitcher.Data;
+using FactorioModSwitcher.Entities;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -41,7 +42,7 @@ namespace FactorioModSwitcher.Business
             get
             {
                 if (m_profiles == null)
-                    m_profiles = readProfiles();
+                    m_profiles = DataHelper.LoadProfiles(m_pathToProfileFolder);
 
                 return m_profiles;
             }
@@ -53,24 +54,6 @@ namespace FactorioModSwitcher.Business
         public FactorioModSwitcherLogic()
         {
 
-        }
-
-        private List<Profile> readProfiles()
-        {
-            List<Profile> profiles = new List<Profile>();
-
-            if (Directory.Exists(m_pathToProfileFolder) == false)
-            {
-                string temp = Path.GetDirectoryName(m_pathToProfileFolder);
-                Directory.CreateDirectory(m_pathToProfileFolder);
-            }
-
-            foreach (string path in Directory.GetFiles(m_pathToProfileFolder))
-            {
-                profiles.Add(new Profile(Path.GetFileNameWithoutExtension(path), JsonConverter.Deserialize<ModList>(path)));
-            }
-
-            return profiles;
         }
 
         public void SwitchProfile(Profile profile)

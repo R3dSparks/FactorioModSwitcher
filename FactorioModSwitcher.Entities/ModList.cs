@@ -1,4 +1,4 @@
-﻿namespace FactorioModSwitcher.Business
+﻿namespace FactorioModSwitcher.Entities
 {
     /// <summary>
     /// Class for json deserialization

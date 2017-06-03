@@ -41,15 +41,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FactorioModSwitcherLogic.cs" />
-    <Compile Include="Mod.cs" />
-    <Compile Include="ModList.cs" />
-    <Compile Include="Profile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FactorioModSwitcher.Data\FactorioModSwitcher.Data.csproj">
       <Project>{F12E5D24-AA4F-41B2-91F9-35664F8FC5CD}</Project>
       <Name>FactorioModSwitcher.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FactorioModSwitcher.Entities\FactorioModSwitcher.Entities.csproj">
+      <Project>{564E05F4-F205-47D3-966D-252C715A2F20}</Project>
+      <Name>FactorioModSwitcher.Entities</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -22,17 +22,24 @@
             </MenuItem>
         </Menu>
 
-        <ListView Grid.Row="1" ItemsSource="{Binding ProfileList}" SelectedItem="{Binding SelectedProfile}">
+        <ListBox Grid.Row="1" ItemsSource="{Binding ProfileList}" SelectedItem="{Binding SelectedProfile}">
+
+            <ListBox.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Edit" Command="{Binding Click_ContextMenu_Edit}" />
+                    <MenuItem Header="Delete" Command="{Binding Click_ContextMenu_Delete}" />
+                </ContextMenu>
+            </ListBox.ContextMenu>
             
-            <ListView.ItemTemplate>
+            <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Label Content="{Binding Name}" />
                 </DataTemplate>    
-            </ListView.ItemTemplate>
+            </ListBox.ItemTemplate>
             
-        </ListView>
+        </ListBox>
         
-        <Button Grid.Row="2" Content="Switch" Command="{Binding Click_Switch}"/>
+        <Button Grid.Row="2" Content="Switch" Command="{Binding Click_Switch}" />
 
     </Grid>
 

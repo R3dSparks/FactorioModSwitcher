@@ -13,7 +13,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FactorioModSwitcher.Business", "FactorioModSwitcher.Business\FactorioModSwitcher.Business.csproj", "{031EE6DE-E50F-446B-AA82-5CAC1366943D}"
 	ProjectSection(ProjectDependencies) = postProject
 		{F12E5D24-AA4F-41B2-91F9-35664F8FC5CD} = {F12E5D24-AA4F-41B2-91F9-35664F8FC5CD}
+		{564E05F4-F205-47D3-966D-252C715A2F20} = {564E05F4-F205-47D3-966D-252C715A2F20}
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FactorioModSwitcher.Entities", "FactorioModSwitcher.Entities\FactorioModSwitcher.Entities.csproj", "{564E05F4-F205-47D3-966D-252C715A2F20}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +36,10 @@ Global
 		{031EE6DE-E50F-446B-AA82-5CAC1366943D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{031EE6DE-E50F-446B-AA82-5CAC1366943D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{031EE6DE-E50F-446B-AA82-5CAC1366943D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{564E05F4-F205-47D3-966D-252C715A2F20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{564E05F4-F205-47D3-966D-252C715A2F20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{564E05F4-F205-47D3-966D-252C715A2F20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{564E05F4-F205-47D3-966D-252C715A2F20}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

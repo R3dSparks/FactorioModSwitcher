@@ -1,19 +1,26 @@
 ﻿using FactorioModSwitcher.Business;
-using FactorioModSwitcher.Data;
-using System;
+using FactorioModSwitcher.Entities;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace FactorioModSwitcher.ViewModels
 {
-    public class MainWindowViewModel : BaseViewModell
+    public class MainWindowViewModel
     {
+
+        #region Private Properties
+
         private FactorioModSwitcherLogic m_logic;
 
+        #endregion
+
+        #region Commands
+
         private RelayCommand m_click_switch;
+
+        private RelayCommand m_click_contextMenu_edit;
+
+        private RelayCommand m_click_contextMenu_delete;
 
         public ICommand Click_Switch
         {
@@ -25,6 +32,32 @@ namespace FactorioModSwitcher.ViewModels
                 return m_click_switch;
             }
         }
+
+        public ICommand Click_ContextMenu_Edit
+        {
+            get
+            {
+                if (m_click_contextMenu_edit == null)
+                    m_click_contextMenu_edit = new RelayCommand(editProfile);
+
+                return m_click_contextMenu_edit;
+            }
+        }
+
+        public ICommand Click_ContextMenu_Delete
+        {
+            get
+            {
+                if (m_click_contextMenu_delete == null)
+                    m_click_contextMenu_delete = new RelayCommand(deleteProfile);
+
+                return m_click_contextMenu_delete;
+            }
+        }
+
+        #endregion
+
+        #region Public Properties
 
         /// <summary>
         /// Currently selected profile
@@ -39,6 +72,10 @@ namespace FactorioModSwitcher.ViewModels
             get => m_logic.Profiles;
         }
 
+        #endregion
+
+        #region Constructor
+
         /// <summary>
         /// Default constructor
         /// </summary>
@@ -47,6 +84,10 @@ namespace FactorioModSwitcher.ViewModels
             m_logic = new FactorioModSwitcherLogic();
         }
 
+        #endregion
+
+        #region Command Methods
+
         /// <summary>
         /// Switch current mod list with the selected profile
         /// </summary>
@@ -54,5 +95,19 @@ namespace FactorioModSwitcher.ViewModels
         {
             m_logic.SwitchProfile(SelectedProfile);
         }
+
+        private void editProfile()
+        {
+            ProfileEditor editor = new ProfileEditor(m_logic, SelectedProfile);
+
+            editor.ShowDialog();
+        }
+
+        private void deleteProfile()
+        {
+
+        }
+
+        #endregion
     }
 }
