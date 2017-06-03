@@ -101,6 +101,30 @@ namespace FactorioModSwitcher.ViewModels
 
         #region Constructor
 
+        public ProfileEditorViewModel(FactorioModSwitcherLogic logic)
+        {
+            m_logic = logic;
+
+            Mod[] cleanModList = new Mod[m_logic.AvailableMods.mods.Length];
+
+            int counter = 0;
+
+            foreach (Mod mod in m_logic.AvailableMods.mods)
+            {
+                Mod cleanMod = new Mod()
+                {
+                    name = mod.name,
+                    enabled = mod.name == "base" ? true : false,
+                };
+
+                cleanModList[counter] = cleanMod;
+
+                counter++;
+            }
+            
+            m_profile = new Profile("New Profile", cleanModList);
+        }
+
         public ProfileEditorViewModel(FactorioModSwitcherLogic logic, Profile profile)
         {
             m_logic = logic;

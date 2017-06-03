@@ -104,24 +104,7 @@ namespace FactorioModSwitcher.ViewModels
 
         private void newProfile()
         {
-            Mod[] cleanModList = new Mod[m_logic.AvailableMods.mods.Length];
-
-            int counter = 0;
-
-            foreach (Mod mod in m_logic.AvailableMods.mods)
-            {
-                Mod cleanMod = new Mod()
-                {
-                    name = mod.name,
-                    enabled = mod.name == "base" ? true : false,
-                };
-
-                cleanModList[counter] = cleanMod;
-
-                counter++;
-            }
-
-            ProfileEditor editor = new ProfileEditor(m_logic, new Profile("New Profile", cleanModList));
+            ProfileEditor editor = new ProfileEditor(m_logic);
 
             editor.ShowDialog();
         }
