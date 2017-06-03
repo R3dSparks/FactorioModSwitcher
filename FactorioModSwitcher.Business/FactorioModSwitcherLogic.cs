@@ -26,7 +26,7 @@ namespace FactorioModSwitcher.Business
         /// </summary>
         private string m_pathToProfileFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Factorio\mods\profiles");
 
-        public ModList MyProperty
+        public ModList AvailableMods
         {
             get
             {

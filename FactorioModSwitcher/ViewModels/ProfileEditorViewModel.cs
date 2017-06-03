@@ -39,6 +39,8 @@ namespace FactorioModSwitcher.ViewModels
 
         public Mod SelectedMod { get; set; }
 
+        public string ProfileName { get; set; }
+
         #endregion
 
         #region Commands
@@ -46,6 +48,32 @@ namespace FactorioModSwitcher.ViewModels
         private RelayCommand m_click_addMod;
 
         private RelayCommand m_click_removeMod;
+
+        private RelayCommand m_click_ok;
+
+        private RelayCommand m_click_cancel;
+
+        public ICommand Click_Ok
+        {
+            get
+            {
+                if (m_click_ok == null)
+                    m_click_ok = new RelayCommand(saveChanges);
+
+                return m_click_ok;
+            }
+        }
+
+        public ICommand Click_Cancel
+        {
+            get
+            {
+                if (m_click_cancel == null)
+                    m_click_cancel = new RelayCommand(cancel);
+
+                return m_click_cancel;
+            }
+        }
 
         public ICommand Click_AddMod
         {
@@ -77,11 +105,23 @@ namespace FactorioModSwitcher.ViewModels
         {
             m_logic = logic;
             m_profile = profile;
+
+            ProfileName = profile.Name;
         }
 
         #endregion
 
         #region Command Methods
+    
+        private void cancel()
+        {
+
+        }
+
+        private void saveChanges()
+        {
+
+        }
 
         private void addModToProfile()
         {

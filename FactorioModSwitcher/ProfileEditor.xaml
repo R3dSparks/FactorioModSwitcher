@@ -9,7 +9,18 @@
 
     <Grid>
 
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
         <Grid>
+            <Label Content="Name"/>
+            <TextBox Text="{Binding ProfileName}" />
+        </Grid>
+        
+        <Grid Grid.Row="1" Margin="5 5 5 5">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
@@ -31,8 +42,8 @@
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
-                <Button Grid.Row="0" VerticalAlignment="Bottom" Height="50" Content="&lt;&lt;" Command="{Binding Click_AddMod}" />
-                <Button Grid.Row="1" VerticalAlignment="Top" Height="50" Content=">>" Command="{Binding Click_RemoveMod}" />
+                <Button Margin="5 5 5 5" Grid.Row="0" VerticalAlignment="Bottom" Height="50" Content="&lt;&lt;" Command="{Binding Click_AddMod}" />
+                <Button Margin="5 5 5 5" Grid.Row="1" VerticalAlignment="Top" Height="50" Content=">>" Command="{Binding Click_RemoveMod}" />
 
             </Grid>
 
@@ -57,15 +68,16 @@
             </ListBox>
         </Grid>
 
-        <Grid>
+        <Grid Grid.Row="2">
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="80" />
+                <ColumnDefinition Width="80" />
             </Grid.ColumnDefinitions>
 
-            <Button Content="Ok" />
-            <Button Content="Cancel" />
+            <Button Grid.Column="1" Height="30" Margin="3 3 3 3" Content="Ok" />
+            <Button Grid.Column="2" Height="30" Margin="3 3 3 3" Content="Cancel" />
 
         </Grid>
 

@@ -17,7 +17,7 @@
 
         <Menu Grid.Row="0">
             <MenuItem Header="Profiles">
-                <MenuItem Header="New Profile" />
+                <MenuItem Header="New Profile" Command="{Binding Click_Menu_NewProfile}"/>
                 <MenuItem Header="Load Profile" />
             </MenuItem>
         </Menu>

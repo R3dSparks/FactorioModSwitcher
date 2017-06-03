@@ -2,6 +2,7 @@
 using FactorioModSwitcher.Entities;
 using System.Collections.Generic;
 using System.Windows.Input;
+using System.Linq;
 
 namespace FactorioModSwitcher.ViewModels
 {
@@ -16,11 +17,24 @@ namespace FactorioModSwitcher.ViewModels
 
         #region Commands
 
+        private RelayCommand m_click_menu_newProfile;
+
         private RelayCommand m_click_switch;
 
         private RelayCommand m_click_contextMenu_edit;
 
         private RelayCommand m_click_contextMenu_delete;
+
+        public ICommand Click_Menu_NewProfile
+        {
+            get
+            {
+                if (m_click_menu_newProfile == null)
+                    m_click_menu_newProfile = new RelayCommand(newProfile);
+
+                return m_click_menu_newProfile;
+            }
+        }
 
         public ICommand Click_Switch
         {
@@ -87,6 +101,30 @@ namespace FactorioModSwitcher.ViewModels
         #endregion
 
         #region Command Methods
+
+        private void newProfile()
+        {
+            Mod[] cleanModList = new Mod[m_logic.AvailableMods.mods.Length];
+
+            int counter = 0;
+
+            foreach (Mod mod in m_logic.AvailableMods.mods)
+            {
+                Mod cleanMod = new Mod()
+                {
+                    name = mod.name,
+                    enabled = mod.name == "base" ? true : false,
+                };
+
+                cleanModList[counter] = cleanMod;
+
+                counter++;
+            }
+
+            ProfileEditor editor = new ProfileEditor(m_logic, new Profile("New Profile", cleanModList));
+
+            editor.ShowDialog();
+        }
 
         /// <summary>
         /// Switch current mod list with the selected profile

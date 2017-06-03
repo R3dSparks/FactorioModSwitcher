@@ -9,13 +9,14 @@ namespace FactorioModSwitcher.Entities
 
         public Mod[] Mods { get; set; }
 
-        /// <summary>
-        /// Default constructor
-        /// </summary>
-        public Profile(string name, ModList modsInProfile)
+        public Profile(string name, Mod[] modsInProfile)
         {
             Name = name;
-            Mods = modsInProfile.mods;
+            Mods = modsInProfile;
+        }
+
+        public Profile(string name, ModList modsInProfile) : this(name, modsInProfile.mods)
+        {
         }
     }
 }
