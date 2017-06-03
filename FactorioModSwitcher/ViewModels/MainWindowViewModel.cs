@@ -8,9 +8,8 @@ using System.Collections.ObjectModel;
 
 namespace FactorioModSwitcher.ViewModels
 {
-    public class MainWindowViewModel : INotifyPropertyChanged
+    public class MainWindowViewModel
     {
-        public event PropertyChangedEventHandler PropertyChanged;
 
         #region Private Properties
 
