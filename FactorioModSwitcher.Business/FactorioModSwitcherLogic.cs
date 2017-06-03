@@ -2,19 +2,17 @@
 using FactorioModSwitcher.Entities;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FactorioModSwitcher.Business
 {
     public class FactorioModSwitcherLogic
     {
-
         private ModList m_availableMods;
 
-        private List<Profile> m_profiles;
+        private ObservableCollection<Profile> m_profiles;
 
         /// <summary>
         /// Path to Factorio mod list in AppData
@@ -37,12 +35,12 @@ namespace FactorioModSwitcher.Business
             }
         }
 
-        public List<Profile> Profiles
+        public ObservableCollection<Profile> Profiles
         {
             get
             {
                 if (m_profiles == null)
-                    m_profiles = DataHelper.LoadProfiles(m_pathToProfileFolder);
+                    m_profiles = new ObservableCollection<Profile>(DataHelper.LoadProfiles(m_pathToProfileFolder));
 
                 return m_profiles;
             }
@@ -61,6 +59,18 @@ namespace FactorioModSwitcher.Business
             JsonConverter.Serialize(profile.Mods, m_pathToModList);
         }
 
+        public void AddProfile(Profile profile)
+        {
+            if (Profiles.Contains(profile) == false)
+            {
+                Profiles.Add(profile);
+            }
+                
+        }
 
+        public void SaveProfile(Profile profile)
+        {
+            JsonConverter.Serialize(profile.SerializationModList, Path.Combine(m_pathToProfileFolder, profile.Name + ".json"));
+        }
     }
 }

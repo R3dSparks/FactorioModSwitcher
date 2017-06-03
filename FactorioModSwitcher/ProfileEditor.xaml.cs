@@ -26,14 +26,14 @@ namespace FactorioModSwitcher
         {
             InitializeComponent();
 
-            this.DataContext = new ProfileEditorViewModel(logic, profile);
+            this.DataContext = new ProfileEditorViewModel(this, logic, profile);
         }
 
         public ProfileEditor(FactorioModSwitcherLogic logic)
         {
             InitializeComponent();
 
-            this.DataContext = new ProfileEditorViewModel(logic);
+            this.DataContext = new ProfileEditorViewModel(this, logic);
         }
     }
 }

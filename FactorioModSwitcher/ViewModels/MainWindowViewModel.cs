@@ -3,11 +3,14 @@ using FactorioModSwitcher.Entities;
 using System.Collections.Generic;
 using System.Windows.Input;
 using System.Linq;
+using System.ComponentModel;
+using System.Collections.ObjectModel;
 
 namespace FactorioModSwitcher.ViewModels
 {
-    public class MainWindowViewModel
+    public class MainWindowViewModel : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
 
         #region Private Properties
 
@@ -81,7 +84,7 @@ namespace FactorioModSwitcher.ViewModels
         /// <summary>
         /// List of all profiles
         /// </summary>
-        public List<Profile> ProfileList
+        public ObservableCollection<Profile> ProfileList
         {
             get => m_logic.Profiles;
         }

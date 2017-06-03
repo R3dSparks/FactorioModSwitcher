@@ -6,5 +6,15 @@
     public class ModList
     {
         public Mod[] mods;
+
+        public ModList()
+        {
+            
+        }
+
+        public ModList(Mod[] _mods)
+        {
+            mods = _mods;
+        }
     }
 }

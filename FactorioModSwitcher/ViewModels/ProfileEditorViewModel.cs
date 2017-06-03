@@ -3,6 +3,7 @@ using FactorioModSwitcher.Entities;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Windows;
 using System.Windows.Input;
 
 namespace FactorioModSwitcher.ViewModels
@@ -13,9 +14,13 @@ namespace FactorioModSwitcher.ViewModels
 
         #region Private Properties
 
+        private Window m_currentWindow;
+
         private FactorioModSwitcherLogic m_logic;
 
         private Profile m_profile;
+
+        private Profile m_profileCopy;
 
         #endregion
 
@@ -25,7 +30,7 @@ namespace FactorioModSwitcher.ViewModels
         {
             get
             {
-                return m_profile.Mods.Where(mod => mod.enabled == true);
+                return m_profileCopy.Mods.Where(mod => mod.enabled == true);
             }
         }
 
@@ -33,7 +38,7 @@ namespace FactorioModSwitcher.ViewModels
         {
             get
             {
-                return m_profile.Mods.Where(mod => mod.enabled == false);
+                return m_profileCopy.Mods.Where(mod => mod.enabled == false);
             }
         }
 
@@ -101,8 +106,10 @@ namespace FactorioModSwitcher.ViewModels
 
         #region Constructor
 
-        public ProfileEditorViewModel(FactorioModSwitcherLogic logic)
+        public ProfileEditorViewModel(Window window, FactorioModSwitcherLogic logic)
         {
+            m_currentWindow = window;
+
             m_logic = logic;
 
             Mod[] cleanModList = new Mod[m_logic.AvailableMods.mods.Length];
@@ -122,13 +129,20 @@ namespace FactorioModSwitcher.ViewModels
                 counter++;
             }
             
-            m_profile = new Profile("New Profile", cleanModList);
+            m_profileCopy = new Profile("New Profile", cleanModList);
+
+            m_profile = m_profileCopy;
+
+            ProfileName = m_profile.Name;
         }
 
-        public ProfileEditorViewModel(FactorioModSwitcherLogic logic, Profile profile)
+        public ProfileEditorViewModel(Window window, FactorioModSwitcherLogic logic, Profile profile)
         {
+            m_currentWindow = window;
+
             m_logic = logic;
             m_profile = profile;
+            m_profileCopy = profile.GetCopy();
 
             ProfileName = profile.Name;
         }
@@ -139,19 +153,31 @@ namespace FactorioModSwitcher.ViewModels
     
         private void cancel()
         {
-
+            m_currentWindow.Close();
         }
 
         private void saveChanges()
         {
+            m_profile.Name = ProfileName;
 
+            for(int i = 0; i < m_profile.Mods.Length; i++)
+            {
+                m_profile.Mods[i].enabled = m_profileCopy.Mods[i].enabled;
+            }
+
+
+            m_logic.AddProfile(m_profile);
+
+            m_logic.SaveProfile(m_profile);
+
+            m_currentWindow.Close();
         }
 
         private void addModToProfile()
         {
             if (SelectedMod.enabled == false)
             {
-                m_profile.Mods.FirstOrDefault(mod => mod.name == SelectedMod.name).enabled = true;
+                m_profileCopy.Mods.FirstOrDefault(mod => mod.name == SelectedMod.name).enabled = true;
                 PropertyChanged(this, new PropertyChangedEventArgs("ProfileMods"));
                 PropertyChanged(this, new PropertyChangedEventArgs("AvailableMods"));
             }
@@ -162,7 +188,7 @@ namespace FactorioModSwitcher.ViewModels
         {
             if (SelectedMod.enabled == true)
             {
-                m_profile.Mods.FirstOrDefault(mod => mod.name == SelectedMod.name).enabled = false;
+                m_profileCopy.Mods.FirstOrDefault(mod => mod.name == SelectedMod.name).enabled = false;
                 PropertyChanged(this, new PropertyChangedEventArgs("ProfileMods"));
                 PropertyChanged(this, new PropertyChangedEventArgs("AvailableMods"));
             }

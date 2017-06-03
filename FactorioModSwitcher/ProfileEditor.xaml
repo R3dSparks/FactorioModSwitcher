@@ -76,8 +76,8 @@
                 <ColumnDefinition Width="80" />
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="1" Height="30" Margin="3 3 3 3" Content="Ok" />
-            <Button Grid.Column="2" Height="30" Margin="3 3 3 3" Content="Cancel" />
+            <Button Grid.Column="1" Height="30" Margin="3 3 3 3" Content="Ok" Command="{Binding Click_Ok}" />
+            <Button Grid.Column="2" Height="30" Margin="3 3 3 3" Content="Cancel" Command="{Binding Click_Cancel}" />
 
         </Grid>
 

@@ -23,7 +23,7 @@ namespace FactorioModSwitcher.Data
             return jsonObject;
         }
 
-        public static void Serialize(object objectToSerialize,string path)
+        public static void Serialize(object objectToSerialize, string path)
         {         
             string output = JsonConvert.SerializeObject(objectToSerialize);
 
