@@ -10,7 +10,11 @@ namespace FactorioModSwitcher.Data
 {
     public static class DataHelper
     {
-        
+        public static void DeleteProfile(string pathToProfiles, Profile profile)
+        {
+
+        }
+
         public static List<Profile> LoadProfiles(string pathToProfiles)
         {
             List<Profile> profiles = new List<Profile>();

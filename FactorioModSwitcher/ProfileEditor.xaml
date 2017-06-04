@@ -16,7 +16,6 @@
         </Grid.RowDefinitions>
 
         <Grid>
-            <Label Content="Name"/>
             <TextBox Text="{Binding ProfileName}" />
         </Grid>
         
@@ -42,8 +41,8 @@
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
-                <Button Margin="5 5 5 5" Grid.Row="0" VerticalAlignment="Bottom" Height="50" Content="&lt;&lt;" Command="{Binding Click_AddMod}" />
-                <Button Margin="5 5 5 5" Grid.Row="1" VerticalAlignment="Top" Height="50" Content=">>" Command="{Binding Click_RemoveMod}" />
+                <Button Margin="5 5 5 5" Grid.Row="0" VerticalAlignment="Bottom" Height="40" Content="&lt;&lt;" Command="{Binding Click_AddMod}" />
+                <Button Margin="5 5 5 5" Grid.Row="1" VerticalAlignment="Top" Height="40" Content=">>" Command="{Binding Click_RemoveMod}" />
 
             </Grid>
 

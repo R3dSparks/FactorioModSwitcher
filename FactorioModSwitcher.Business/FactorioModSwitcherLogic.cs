@@ -72,5 +72,10 @@ namespace FactorioModSwitcher.Business
         {
             JsonConverter.Serialize(profile.SerializationModList, Path.Combine(m_pathToProfileFolder, profile.Name + ".json"));
         }
+
+        public void DeleteProfile(Profile profile)
+        {
+            Profiles.Remove(profile);
+        }
     }
 }

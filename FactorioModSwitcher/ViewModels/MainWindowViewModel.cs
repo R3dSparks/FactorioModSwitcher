@@ -128,7 +128,14 @@ namespace FactorioModSwitcher.ViewModels
 
         private void deleteProfile()
         {
+            DialogWindow confirmationWindow = new DialogWindow("Delete", "Do you really want to delete this profile?");
 
+            confirmationWindow.ShowDialog();
+
+            if(confirmationWindow.DialogResult == true)
+            {
+                m_logic.DeleteProfile(SelectedProfile);
+            }
         }
 
         #endregion

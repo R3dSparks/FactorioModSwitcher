@@ -1,5 +1,6 @@
 ﻿using FactorioModSwitcher.Business;
 using FactorioModSwitcher.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -158,6 +159,9 @@ namespace FactorioModSwitcher.ViewModels
 
         private void saveChanges()
         {
+            if (m_logic.Profiles.Any(profile => profile.Name == ProfileName))
+                throw new Exception();
+
             m_profile.Name = ProfileName;
 
             for(int i = 0; i < m_profile.Mods.Length; i++)
