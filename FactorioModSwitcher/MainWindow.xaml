@@ -18,7 +18,7 @@
         <Menu Grid.Row="0">
             <MenuItem Header="Profiles">
                 <MenuItem Header="New Profile" Command="{Binding Click_Menu_NewProfile}"/>
-                <MenuItem Header="Load Profile" />
+                <MenuItem Header="Add from clipboard" Command="{Binding Click_Menu_AddFromClipboard}" />
             </MenuItem>
         </Menu>
 
@@ -28,6 +28,7 @@
                 <ContextMenu>
                     <MenuItem Header="Edit" Command="{Binding Click_ContextMenu_Edit}" />
                     <MenuItem Header="Delete" Command="{Binding Click_ContextMenu_Delete}" />
+                    <MenuItem Header="Copy to clipboard" Command="{Binding Click_ContextMenu_CopyToClipboard}" />
                 </ContextMenu>
             </ListBox.ContextMenu>
             

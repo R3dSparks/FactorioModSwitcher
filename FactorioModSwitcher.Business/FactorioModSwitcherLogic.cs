@@ -86,5 +86,15 @@ namespace FactorioModSwitcher.Business
             Profiles.Remove(profile);
             DataHelper.DeleteProfile(m_pathToProfileFolder, profile);
         }
+
+        public ModList GetModListFromString(string profileString)
+        {
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<ModList>(profileString);
+        }
+
+        public string GetProfileString(Profile profile)
+        {
+            return Newtonsoft.Json.JsonConvert.SerializeObject(profile.SerializationModList);
+        }
     }
 }

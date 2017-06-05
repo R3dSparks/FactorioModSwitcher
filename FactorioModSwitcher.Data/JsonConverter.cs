@@ -10,7 +10,7 @@ using System.Diagnostics;
 namespace FactorioModSwitcher.Data
 {
     public static class JsonConverter
-    {     
+    {
         public static T Deserialize<T>(string path)
         {
             T jsonObject;

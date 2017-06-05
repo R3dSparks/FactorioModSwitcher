@@ -5,6 +5,7 @@ using System.Windows.Input;
 using System.Linq;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
+using System.Windows;
 
 namespace FactorioModSwitcher.ViewModels
 {
@@ -21,11 +22,37 @@ namespace FactorioModSwitcher.ViewModels
 
         private RelayCommand m_click_menu_newProfile;
 
+        private RelayCommand m_click_menu_addFromClipboard;
+
         private RelayCommand m_click_switch;
 
         private RelayCommand m_click_contextMenu_edit;
 
         private RelayCommand m_click_contextMenu_delete;
+
+        private RelayCommand m_click_contextMenu_copyToClipboard;
+
+        public ICommand Click_Menu_AddFromClipboard
+        {
+            get
+            {
+                if (m_click_menu_addFromClipboard == null)
+                    m_click_menu_addFromClipboard = new RelayCommand(addFromClipboard);
+
+                return m_click_menu_addFromClipboard;
+            }
+        }
+
+        public ICommand Click_ContextMenu_CopyToClipboard
+        {
+            get
+            {
+                if (m_click_contextMenu_copyToClipboard == null)
+                    m_click_contextMenu_copyToClipboard = new RelayCommand(copyToClipboard);
+
+                return m_click_contextMenu_copyToClipboard;
+            }
+        }
 
         public ICommand Click_Menu_NewProfile
         {
@@ -103,6 +130,20 @@ namespace FactorioModSwitcher.ViewModels
         #endregion
 
         #region Command Methods
+
+        private void addFromClipboard()
+        {
+            Profile profile = new Profile("Copied profile", m_logic.GetModListFromString(Clipboard.GetText()));
+
+            ProfileEditor editor = new ProfileEditor(m_logic, profile);
+
+            editor.ShowDialog();
+        }
+
+        private void copyToClipboard()
+        {
+            Clipboard.SetText(m_logic.GetProfileString(SelectedProfile));
+        }
 
         private void newProfile()
         {
