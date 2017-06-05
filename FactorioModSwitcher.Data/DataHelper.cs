@@ -12,7 +12,10 @@ namespace FactorioModSwitcher.Data
     {
         public static void DeleteProfile(string pathToProfiles, Profile profile)
         {
+            string filePath = Path.Combine(pathToProfiles, profile.Name + ".json");
 
+            if (File.Exists(filePath))
+                File.Delete(filePath);
         }
 
         public static List<Profile> LoadProfiles(string pathToProfiles)

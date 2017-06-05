@@ -68,14 +68,23 @@ namespace FactorioModSwitcher.Business
                 
         }
 
+        /// <summary>
+        /// Save profile to file
+        /// </summary>
+        /// <param name="profile"><see cref="Profile"/> to save</param>
         public void SaveProfile(Profile profile)
         {
             JsonConverter.Serialize(profile.SerializationModList, Path.Combine(m_pathToProfileFolder, profile.Name + ".json"));
         }
 
+        /// <summary>
+        /// Delete profile from profile list and remove its file
+        /// </summary>
+        /// <param name="profile"><see cref="Profile"/> to delete</param>
         public void DeleteProfile(Profile profile)
         {
             Profiles.Remove(profile);
+            DataHelper.DeleteProfile(m_pathToProfileFolder, profile);
         }
     }
 }

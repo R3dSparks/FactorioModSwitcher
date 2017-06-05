@@ -159,9 +159,6 @@ namespace FactorioModSwitcher.ViewModels
 
         private void saveChanges()
         {
-            if (m_logic.Profiles.Any(profile => profile.Name == ProfileName))
-                throw new Exception();
-
             m_profile.Name = ProfileName;
 
             for(int i = 0; i < m_profile.Mods.Length; i++)

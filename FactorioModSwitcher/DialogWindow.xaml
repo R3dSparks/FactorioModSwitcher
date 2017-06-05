@@ -5,27 +5,27 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FactorioModSwitcher"
         mc:Ignorable="d"
-        Title="DialogWindow" Height="300" Width="300">
+        Title="{Binding Title}" Height="Auto" Width="300" SizeToContent="WidthAndHeight">
     
     <Grid>
 
         <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="30" />
         </Grid.RowDefinitions>
 
-        <Label Grid.Row="0" />
+        <TextBlock Grid.Row="0" Text="{Binding Message}" />
 
         <Grid Grid.Row="1" >
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="50" />
-                <ColumnDefinition Width="50" />
+                <ColumnDefinition Width="80" />
+                <ColumnDefinition Width="80" />
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="1" Content="Ok" Command="{Binding Click_Ok}" />
-            <Button Grid.Column="2" Content="Cancel" Command="{Binding Click_Cancel}" />
+            <Button Margin="3 3 3 3" Grid.Column="1" Content="Ok" Command="{Binding Click_Ok}" />
+            <Button Margin="3 3 3 3" Grid.Column="2" Content="Cancel" Command="{Binding Click_Cancel}" />
 
         </Grid>
 
