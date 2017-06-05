@@ -56,7 +56,7 @@ namespace FactorioModSwitcher.Business
 
         public void SwitchProfile(Profile profile)
         {
-            JsonConverter.Serialize(profile.Mods, m_pathToModList);
+            JsonConverter.Serialize(profile.SerializationModList, m_pathToModList);
         }
 
         public void AddProfile(Profile profile)
