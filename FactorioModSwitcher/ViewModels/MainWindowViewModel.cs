@@ -1,9 +1,6 @@
 ﻿using FactorioModSwitcher.Business;
 using FactorioModSwitcher.Entities;
-using System.Collections.Generic;
 using System.Windows.Input;
-using System.Linq;
-using System.ComponentModel;
 using System.Collections.ObjectModel;
 using System.Windows;
 
@@ -31,6 +28,19 @@ namespace FactorioModSwitcher.ViewModels
         private RelayCommand m_click_contextMenu_delete;
 
         private RelayCommand m_click_contextMenu_copyToClipboard;
+
+        private RelayCommand m_click_menu_saveModList;
+
+        public ICommand Click_Menu_SaveModList
+        {
+            get
+            {
+                if (m_click_menu_saveModList == null)
+                    m_click_menu_saveModList = new RelayCommand(saveModList);
+
+                return m_click_menu_saveModList;
+            }
+        }
 
         public ICommand Click_Menu_AddFromClipboard
         {
@@ -130,6 +140,15 @@ namespace FactorioModSwitcher.ViewModels
         #endregion
 
         #region Command Methods
+
+        private void saveModList()
+        {
+            Profile profile = new Profile("Modlist save", m_logic.AvailableMods);
+
+            ProfileEditor editor = new ProfileEditor(m_logic, profile);
+
+            editor.ShowDialog();
+        }
 
         private void addFromClipboard()
         {

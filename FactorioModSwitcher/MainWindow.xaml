@@ -18,6 +18,7 @@
         <Menu Grid.Row="0">
             <MenuItem Header="Profiles">
                 <MenuItem Header="New Profile" Command="{Binding Click_Menu_NewProfile}"/>
+                <MenuItem Header="Save modlist" Command="{Binding Click_Menu_SaveModList}" />
                 <MenuItem Header="Add from clipboard" Command="{Binding Click_Menu_AddFromClipboard}" />
             </MenuItem>
         </Menu>
