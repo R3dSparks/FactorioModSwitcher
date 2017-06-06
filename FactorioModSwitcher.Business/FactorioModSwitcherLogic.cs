@@ -1,5 +1,6 @@
 ﻿using FactorioModSwitcher.Data;
 using FactorioModSwitcher.Entities;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -14,22 +15,14 @@ namespace FactorioModSwitcher.Business
 
         private ObservableCollection<Profile> m_profiles;
 
-        /// <summary>
-        /// Path to Factorio mod list in AppData
-        /// </summary>
-        private string m_pathToModList = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Factorio\mods\mod-list.json");
 
-        /// <summary>
-        /// Path to profile folder inside Factorio mods folder
-        /// </summary>
-        private string m_pathToProfileFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Factorio\mods\profiles");
 
         public ModList AvailableMods
         {
             get
             {
                 if (m_availableMods == null)
-                    m_availableMods = JsonConverter.Deserialize<ModList>(m_pathToModList);
+                    m_availableMods = DataHelper.LoadModList();
 
                 return m_availableMods;
             }
@@ -40,7 +33,7 @@ namespace FactorioModSwitcher.Business
             get
             {
                 if (m_profiles == null)
-                    m_profiles = new ObservableCollection<Profile>(DataHelper.LoadProfiles(m_pathToProfileFolder));
+                    m_profiles = new ObservableCollection<Profile>(DataHelper.LoadProfiles());
 
                 return m_profiles;
             }
@@ -56,7 +49,7 @@ namespace FactorioModSwitcher.Business
 
         public void SwitchProfile(Profile profile)
         {
-            JsonConverter.Serialize(profile.SerializationModList, m_pathToModList);
+            
         }
 
         public void AddProfile(Profile profile)
@@ -74,7 +67,7 @@ namespace FactorioModSwitcher.Business
         /// <param name="profile"><see cref="Profile"/> to save</param>
         public void SaveProfile(Profile profile)
         {
-            JsonConverter.Serialize(profile.SerializationModList, Path.Combine(m_pathToProfileFolder, profile.Name + ".json"));
+            DataHelper.SaveProfile(profile);
         }
 
         /// <summary>
@@ -84,17 +77,17 @@ namespace FactorioModSwitcher.Business
         public void DeleteProfile(Profile profile)
         {
             Profiles.Remove(profile);
-            DataHelper.DeleteProfile(m_pathToProfileFolder, profile);
+            DataHelper.DeleteProfile(profile);
         }
 
         public ModList GetModListFromString(string profileString)
         {
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<ModList>(profileString);
+            return JsonConvert.DeserializeObject<ModList>(profileString);
         }
 
         public string GetProfileString(Profile profile)
         {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(profile.SerializationModList);
+            return JsonConvert.SerializeObject(profile.SerializationModList);
         }
     }
 }
