@@ -70,14 +70,24 @@ namespace FactorioModSwitcher.Business
 
         }
 
+        /// <summary>
+        /// Get all mods that are in the profile but not in the current mod list
+        /// </summary>
+        /// <param name="profile"></param>
+        /// <returns></returns>
         private List<Mod> nonAvailableModsFromProfile(Profile profile)
         {
-
+            return profile.ProfileModList.mods.Except(AvailableMods.mods, new ModComparer()).ToList();
         }
 
+        /// <summary>
+        /// Get all mods that are in the current mod list but not in the profile
+        /// </summary>
+        /// <param name="profile"></param>
+        /// <returns></returns>
         private List<Mod> nonAvailableModsInProfile(Profile profile)
         {
-
+            return AvailableMods.mods.Except(profile.ProfileModList.mods, new ModComparer()).ToList();
         }
 
         private void addAvailableModsToProfile(Profile profile)
