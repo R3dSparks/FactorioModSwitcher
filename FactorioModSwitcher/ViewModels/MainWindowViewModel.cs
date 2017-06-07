@@ -3,6 +3,7 @@ using FactorioModSwitcher.Entities;
 using System.Windows.Input;
 using System.Collections.ObjectModel;
 using System.Windows;
+using System.Collections.Generic;
 
 namespace FactorioModSwitcher.ViewModels
 {
@@ -135,9 +136,35 @@ namespace FactorioModSwitcher.ViewModels
         public MainWindowViewModel()
         {
             m_logic = new FactorioModSwitcherLogic();
+
+            foreach (var profile in m_logic.Profiles)
+            {
+                messageModMismatch(profile);
+            }
         }
 
         #endregion
+
+        private void messageModMismatch(Profile profile)
+        {
+            List<Mod> mismatchesFromProfile = m_logic.NonAvailableModsFromProfile(profile);
+
+            if(mismatchesFromProfile != null && mismatchesFromProfile.Count > 0)
+            {
+                string message = string.Empty;
+
+                message += $"Profile {profile.Name} has mods that aren't available in your factorio mods folder:";
+
+                foreach (var mod in mismatchesFromProfile)
+                {
+                    message += $"\n - {mod.name}";
+                }
+
+                DialogWindow window = new DialogWindow("Mod mismatch", message);
+
+                window.Show();
+            }           
+        }
 
         #region Command Methods
 

@@ -14,8 +14,6 @@ namespace FactorioModSwitcher.Business
 
         private ObservableCollection<Profile> m_profiles;
 
-
-
         public ModList AvailableMods
         {
             get
@@ -75,7 +73,7 @@ namespace FactorioModSwitcher.Business
         /// </summary>
         /// <param name="profile"></param>
         /// <returns></returns>
-        private List<Mod> nonAvailableModsFromProfile(Profile profile)
+        public List<Mod> NonAvailableModsFromProfile(Profile profile)
         {
             return profile.ProfileModList.mods.Except(AvailableMods.mods, new ModComparer()).ToList();
         }
@@ -85,7 +83,7 @@ namespace FactorioModSwitcher.Business
         /// </summary>
         /// <param name="profile"></param>
         /// <returns></returns>
-        private List<Mod> nonAvailableModsInProfile(Profile profile)
+        public List<Mod> NonAvailableModsInProfile(Profile profile)
         {
             return AvailableMods.mods.Except(profile.ProfileModList.mods, new ModComparer()).ToList();
         }
