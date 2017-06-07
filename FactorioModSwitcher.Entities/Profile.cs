@@ -5,11 +5,16 @@ namespace FactorioModSwitcher.Entities
 {
     public class Profile
     {
-        public ModList SerializationModList { get; set; }
-
+        /// <summary>
+        /// Name of this profile
+        /// </summary>
         public string Name { get; set; }
 
-        public Mod[] Mods { get => SerializationModList.mods; }
+        /// <summary>
+        /// <see cref="ModList"/> for this profile
+        /// </summary>
+        public ModList ProfileModList { get; set; }
+
 
         public Profile(string name, Mod[] modList) : this(name, new ModList(modList))
         {
@@ -18,19 +23,16 @@ namespace FactorioModSwitcher.Entities
         public Profile(string name, ModList modsInProfile)
         {
             Name = name;
-            SerializationModList = modsInProfile;
+            ProfileModList = modsInProfile;
         }
 
+        /// <summary>
+        /// Get a deep copy of this profile
+        /// </summary>
+        /// <returns></returns>
         public Profile GetCopy()
         {
-            Mod[] modsCopy = new Mod[Mods.Length];
-
-            for(int i = 0; i < Mods.Length; i++)
-            {
-                modsCopy[i] = new Mod(Mods[i].name, Mods[i].enabled);
-            }
-
-            return new Profile(Name, modsCopy);
+            return new Profile(Name, ProfileModList.GetCopy());
         }
     }
 }

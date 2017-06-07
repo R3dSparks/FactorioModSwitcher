@@ -31,7 +31,7 @@ namespace FactorioModSwitcher.ViewModels
         {
             get
             {
-                return m_profileCopy.Mods.Where(mod => mod.enabled == true);
+                return m_profileCopy.ProfileModList.mods.Where(mod => mod.enabled == true);
             }
         }
 
@@ -39,7 +39,7 @@ namespace FactorioModSwitcher.ViewModels
         {
             get
             {
-                return m_profileCopy.Mods.Where(mod => mod.enabled == false);
+                return m_profileCopy.ProfileModList.mods.Where(mod => mod.enabled == false);
             }
         }
 
@@ -129,8 +129,19 @@ namespace FactorioModSwitcher.ViewModels
 
                 counter++;
             }
+
+            string profileName = "New Profile";
+
+            int i = 2;
+
+            while (m_logic.Profiles.Any(profile => profile.Name == profileName))
+            {
+                profileName = "New Profile " + i;
+
+                i++;
+            }
             
-            m_profileCopy = new Profile("New Profile", cleanModList);
+            m_profileCopy = new Profile(profileName, cleanModList);
 
             m_profile = m_profileCopy;
 
@@ -159,13 +170,18 @@ namespace FactorioModSwitcher.ViewModels
 
         private void saveChanges()
         {
-            m_profile.Name = ProfileName;
 
-            for(int i = 0; i < m_profile.Mods.Length; i++)
+            if(m_profile.Name != ProfileName)
             {
-                m_profile.Mods[i].enabled = m_profileCopy.Mods[i].enabled;
+                m_logic.DeleteProfile(m_profile);
             }
 
+            m_profile.Name = ProfileName;
+
+            for(int i = 0; i < m_profile.ProfileModList.mods.Length; i++)
+            {
+                m_profile.ProfileModList.mods[i].enabled = m_profileCopy.ProfileModList.mods[i].enabled;
+            }
 
             m_logic.AddProfile(m_profile);
 
@@ -178,7 +194,7 @@ namespace FactorioModSwitcher.ViewModels
         {
             if (SelectedMod.enabled == false)
             {
-                m_profileCopy.Mods.FirstOrDefault(mod => mod.name == SelectedMod.name).enabled = true;
+                m_profileCopy.ProfileModList.mods.FirstOrDefault(mod => mod.name == SelectedMod.name).enabled = true;
                 PropertyChanged(this, new PropertyChangedEventArgs("ProfileMods"));
                 PropertyChanged(this, new PropertyChangedEventArgs("AvailableMods"));
             }
@@ -189,7 +205,7 @@ namespace FactorioModSwitcher.ViewModels
         {
             if (SelectedMod.enabled == true)
             {
-                m_profileCopy.Mods.FirstOrDefault(mod => mod.name == SelectedMod.name).enabled = false;
+                m_profileCopy.ProfileModList.mods.FirstOrDefault(mod => mod.name == SelectedMod.name).enabled = false;
                 PropertyChanged(this, new PropertyChangedEventArgs("ProfileMods"));
                 PropertyChanged(this, new PropertyChangedEventArgs("AvailableMods"));
             }

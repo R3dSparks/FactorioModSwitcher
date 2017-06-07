@@ -183,7 +183,7 @@ namespace FactorioModSwitcher.ViewModels
         {
             ProfileEditor editor = new ProfileEditor(m_logic, SelectedProfile);
 
-            editor.ShowDialog();
+            editor.Show();
         }
 
         private void deleteProfile()

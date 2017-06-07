@@ -18,13 +18,6 @@ namespace FactorioModSwitcher.Data
         /// </summary>
         public static readonly string PathToProfileFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Factorio\mods\profiles");
 
-        public static void SaveProfile(Profile profile)
-        {
-            string jsonProfileString = JsonConvert.SerializeObject(profile.SerializationModList);
-
-            SaveString(jsonProfileString, Path.Combine(PathToProfileFolder, profile.Name + ".json"));
-        }
-
         /// <summary>
         /// Load string from file
         /// </summary>
@@ -55,17 +48,7 @@ namespace FactorioModSwitcher.Data
             }
         }
 
-        /// <summary>
-        /// Delete a profile file
-        /// </summary>
-        /// <param name="profile">The profile to delete</param>
-        public static void DeleteProfile(Profile profile)
-        {
-            string filePath = Path.Combine(PathToProfileFolder, profile.Name + ".json");
 
-            if (File.Exists(filePath))
-                File.Delete(filePath);
-        }
 
         /// <summary>
         /// Load the current factorio mod list
@@ -78,27 +61,6 @@ namespace FactorioModSwitcher.Data
             return JsonConvert.DeserializeObject<ModList>(jsonModList);
         }
 
-        /// <summary>
-        /// Load all available profiles
-        /// </summary>
-        /// <returns>A <see cref="Profile"/> list</returns>
-        public static List<Profile> LoadProfiles()
-        {
-            List<Profile> profiles = new List<Profile>();
 
-            if (Directory.Exists(PathToProfileFolder) == false)
-            {
-                Directory.CreateDirectory(PathToProfileFolder);
-            }
-            
-            foreach (string path in Directory.GetFiles(PathToProfileFolder))
-            {
-                string jsonProfileModList = LoadString(path);
-
-                profiles.Add(new Profile(Path.GetFileNameWithoutExtension(path), JsonConvert.DeserializeObject<ModList>(jsonProfileModList)));
-            }
-
-            return profiles;
-        }
     }
 }
