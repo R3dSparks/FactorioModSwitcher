@@ -52,14 +52,16 @@ namespace FactorioModSwitcher.ViewModels
 
         private void ok()
         {
-            currentWindow.DialogResult = true;
+            if(System.Windows.Interop.ComponentDispatcher.IsThreadModal)
+                currentWindow.DialogResult = true;
 
             currentWindow.Close();
         }
 
         private void cancel()
         {
-            currentWindow.DialogResult = false;
+            if (System.Windows.Interop.ComponentDispatcher.IsThreadModal)
+                currentWindow.DialogResult = false;
 
             currentWindow.Close();
         }
