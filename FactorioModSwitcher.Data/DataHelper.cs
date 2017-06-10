@@ -61,6 +61,13 @@ namespace FactorioModSwitcher.Data
             return JsonConvert.DeserializeObject<ModList>(jsonModList);
         }
 
+        public static void SaveModList(ModList modList)
+        {
+            string jsonModList = JsonConvert.SerializeObject(modList);
+
+            SaveString(jsonModList, PathToModList);
+        }
+
 
     }
 }

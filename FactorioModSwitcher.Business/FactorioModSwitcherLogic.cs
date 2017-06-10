@@ -95,7 +95,7 @@ namespace FactorioModSwitcher.Business
 
         public void SwitchProfile(Profile profile)
         {
-            
+            DataHelper.SaveModList(profile.ProfileModList);
         }
 
         public void AddProfile(Profile profile)
