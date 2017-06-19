@@ -103,7 +103,7 @@ namespace FactorioModSwitcher.Business
         /// <param name="profile"></param>
         public void SwitchProfile(Profile profile)
         {
-            
+            DataHelper.SaveModList(profile.ProfileModList);
         }
 
         public void AddProfile(Profile profile)
