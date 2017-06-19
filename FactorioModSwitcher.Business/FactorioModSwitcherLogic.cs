@@ -88,11 +88,19 @@ namespace FactorioModSwitcher.Business
             return AvailableMods.mods.Except(profile.ProfileModList.mods, new ModComparer()).ToList();
         }
 
+        /// <summary>
+        /// Union the profile mods with the available mods
+        /// </summary>
+        /// <param name="profile"></param>
         private void addAvailableModsToProfile(Profile profile)
         {
             profile.ProfileModList.mods = profile.ProfileModList.mods.Union(GetCleanModList(), new ModComparer()).ToArray();
         }
 
+        /// <summary>
+        /// Replace the current mod list with the profile content
+        /// </summary>
+        /// <param name="profile"></param>
         public void SwitchProfile(Profile profile)
         {
             
