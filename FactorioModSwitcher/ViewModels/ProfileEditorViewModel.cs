@@ -192,7 +192,7 @@ namespace FactorioModSwitcher.ViewModels
 
         private void addModToProfile()
         {
-            if (SelectedMod.enabled == false)
+            if (SelectedMod != null && SelectedMod.enabled == false)
             {
                 m_profileCopy.ProfileModList.mods.FirstOrDefault(mod => mod.name == SelectedMod.name).enabled = true;
                 PropertyChanged(this, new PropertyChangedEventArgs("ProfileMods"));
@@ -203,7 +203,7 @@ namespace FactorioModSwitcher.ViewModels
 
         private void removeModFromProfile()
         {
-            if (SelectedMod.enabled == true)
+            if (SelectedMod != null && SelectedMod.enabled == true)
             {
                 m_profileCopy.ProfileModList.mods.FirstOrDefault(mod => mod.name == SelectedMod.name).enabled = false;
                 PropertyChanged(this, new PropertyChangedEventArgs("ProfileMods"));

@@ -101,8 +101,11 @@ namespace FactorioModSwitcher.Business
         /// Replace the current mod list with the profile content
         /// </summary>
         /// <param name="profile"></param>
-        public void SwitchProfile(Profile profile)
+        public void SwitchProfile(Profile profile) 
         {
+            if (profile == null)
+                return;
+
             DataHelper.SaveModList(profile.ProfileModList);
         }
 
